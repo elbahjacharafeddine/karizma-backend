@@ -1,6 +1,9 @@
 package com.youtube.jwt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +24,11 @@ public class User {
             }
     )
     private Set<Role> role;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Recette> recettes;
 
     public String getUserName() {
         return userName;
@@ -56,6 +64,14 @@ public class User {
 
     public Set<Role> getRole() {
         return role;
+    }
+
+    public List<Recette> getRecettes() {
+        return recettes;
+    }
+
+    public void setRecettes(List<Recette> recettes) {
+        this.recettes = recettes;
     }
 
     public void setRole(Set<Role> role) {

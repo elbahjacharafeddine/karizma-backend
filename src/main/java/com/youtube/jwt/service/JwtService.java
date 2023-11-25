@@ -3,6 +3,7 @@ package com.youtube.jwt.service;
 import com.youtube.jwt.dao.UserDao;
 import com.youtube.jwt.entity.JwtRequest;
 import com.youtube.jwt.entity.JwtResponse;
+import com.youtube.jwt.entity.Recette;
 import com.youtube.jwt.entity.User;
 import com.youtube.jwt.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -52,6 +55,7 @@ public class JwtService implements UserDetailsService {
                     user.getUserName(),
                     user.getUserPassword(),
                     getAuthority(user)
+
             );
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
@@ -65,6 +69,7 @@ public class JwtService implements UserDetailsService {
         });
         return authorities;
     }
+
 
     private void authenticate(String userName, String userPassword) throws Exception {
         try {

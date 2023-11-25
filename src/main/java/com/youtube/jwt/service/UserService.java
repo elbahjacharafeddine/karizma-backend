@@ -1,7 +1,11 @@
 package com.youtube.jwt.service;
 
+import com.youtube.jwt.dao.EtapeDoa;
+import com.youtube.jwt.dao.IngredientDao;
 import com.youtube.jwt.dao.RoleDao;
 import com.youtube.jwt.dao.UserDao;
+import com.youtube.jwt.entity.Etape;
+import com.youtube.jwt.entity.Ingredient;
 import com.youtube.jwt.entity.Role;
 import com.youtube.jwt.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,37 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private IngredientDao ingredientDao;
+
+    @Autowired
+    private EtapeDoa etapeDoa;
     public void initRoleAndUser() {
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setNom("Pasta");
+        ingredientDao.save(ingredient);
+
+        Ingredient ingredient1 = new Ingredient();
+        ingredient1.setNom("Ground Beef");
+        ingredientDao.save(ingredient1);
+
+        Ingredient ingredient2 = new Ingredient();
+        ingredient2.setNom("Tomato Sauce");
+        ingredientDao.save(ingredient2);
+
+        Etape etape = new Etape();
+        etape.setNom("Boil the pasta");
+        etapeDoa.save(etape);
+
+        Etape etape1 = new Etape();
+        etape1.setNom("Cook the ground beef and mix with tomato sauce");
+        etapeDoa.save(etape1);
+
+        Etape etape2 = new Etape();
+        etape2.setNom("Combine the cooked pasta with the meat sauce");
+        etapeDoa.save(etape2);
+
 
         Role adminRole = new Role();
         adminRole.setRoleName("Admin");
